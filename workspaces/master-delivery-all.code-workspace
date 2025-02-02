@@ -1,0 +1,97 @@
+{
+	"folders": [
+		{
+			"name": "📱 Frontend",
+			"path": "../frontend"
+		},
+		{
+			"name": "⚙️ Backend",
+			"path": "../backend"
+		},
+		{
+			"name": "✨ root",
+			"path": ".."
+		},
+		{
+			"name": "📚auth-service",
+			"path": "../backend/services/auth-service"
+		},
+		{
+			"name": "📚delivery-service",
+			"path": "../backend/services/delivery-service"
+		},
+		{
+			"name": "📚geolocation-service",
+			"path": "../backend/services/geolocation-service"
+		},
+		{
+			"name": "📚notification-service",
+			"path": "../backend/services/notification-service"
+		},
+		{
+			"name": "📚order-service",
+			"path": "../backend/services/order-service"
+		},
+		{
+			"name": "📚payment-service",
+			"path": "../backend/services/payment-service"
+		},
+		{
+			"name": "📚restaurant-service",
+			"path": "../backend/services/restaurant-service"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"frontend/": true,
+			"backend/": true
+		},
+		"monorepoWorkspace.folders.custom": [
+			{
+				"regex": "Master Frontend",
+				"prefix": "🔥",
+				"path": "../frontend"
+			},
+			{
+				"regex": "Master Backend",
+				"prefix": "📚",
+				"path": "../backend"
+			},
+			{
+				"regex": "auth-service",
+				"prefix": "📚",
+				"path": "../backend/services/auth-service"
+			},
+			{
+				"regex": "delivery-service",
+				"prefix": "📚",
+				"path": "../backend/services/delivery-service"
+			},
+			{
+				"regex": "geolocation-service",
+				"prefix": "📚",
+				"path": "../backend/services/geolocation-service"
+			},
+			{
+				"regex": "notification-service",
+				"prefix": "📚",
+				"path": "../backend/services/notification-service"
+			},
+			{
+				"regex": "order-service",
+				"prefix": "📚",
+				"path": "../backend/services/order-service"
+			},
+			{
+				"regex": "payment-service",
+				"prefix": "📚",
+				"path": "../backend/services/payment-service"
+			},
+			{
+				"regex": "restaurant-service",
+				"prefix": "📚",
+				"path": "../backend/services/restaurant-service"
+			}
+		]
+	}
+}
