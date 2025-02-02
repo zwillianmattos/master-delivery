@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Restaurant {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String   // reference to auth service user
+  menus       Menu[]
+  categories  Category[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("restaurants")
+}
+
+model Menu {
+  id           String     @id @default(cuid())
+  name         String
+  description  String?
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  items        MenuItem[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map("menus")
+}
+
+model MenuItem {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  price       Decimal
+  menu        Menu             @relation(fields: [menuId], references: [id])
+  menuId      String
+  categories  MenuItemCategory[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("menu_items")
+}
+
+model MenuItemCategory {
+  id          String     @id @default(cuid())
+  name        String
+  menuItems   MenuItem[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("menu_item_categories")
+}
+
+model Category {
+  id           String       @id @default(cuid())
+  name         String
+  description  String?
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("categories")
+}

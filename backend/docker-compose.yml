@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Databases
   postgres:
@@ -12,6 +10,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - master-delivery-network
 
   mongodb:
     image: mongo:6-jammy
@@ -22,6 +22,8 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - master-delivery-network
 
   redis:
     image: redis:7-alpine
@@ -29,6 +31,8 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    networks:
+      - master-delivery-network
 
   # Message Broker
   kafka:
@@ -44,6 +48,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - master-delivery-network
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.1
@@ -52,6 +58,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - master-delivery-network
 
   # Monitoring
   prometheus:
@@ -61,6 +69,8 @@ services:
     volumes:
       - ./docker/config/prometheus:/etc/prometheus
       - prometheus_data:/prometheus
+    networks:
+      - master-delivery-network
 
   grafana:
     image: grafana/grafana:10.0.3
@@ -70,6 +80,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=masterdelivery
     volumes:
       - grafana_data:/var/lib/grafana
+    networks:
+      - master-delivery-network
+
 
 volumes:
   postgres_data:
@@ -77,3 +90,8 @@ volumes:
   redis_data:
   prometheus_data:
   grafana_data: 
+
+
+networks:
+  master-delivery-network:
+    driver: bridge 
