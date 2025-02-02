@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (User) {}
+  rpc CreateUser (CreateUserRequest) returns (User) {}
+  rpc ValidateToken (ValidateTokenRequest) returns (TokenValidation) {}
+}
+
+message GetUserRequest {
+  string email = 1;
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+  repeated string roles = 3;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  repeated string roles = 3;
+  string status = 4;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message TokenValidation {
+  bool isValid = 1;
+  string userId = 2;
+  repeated string roles = 3;
+} 
