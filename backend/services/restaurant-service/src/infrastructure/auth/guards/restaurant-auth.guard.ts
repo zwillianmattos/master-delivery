@@ -39,19 +39,15 @@ export class RestaurantAuthGuard implements CanActivate {
         roles: tokenData.roles,
       };
 
-      // Check required roles if specified
-      const requiredRoles = this.reflector.get<string[]>(
-        'roles',
-        context.getHandler(),
+      // Check if user has either RESTAURANT or ADMIN role
+      const hasValidRole = tokenData.roles.some((role: string) =>
+        ['RESTAURANT', 'ADMIN'].includes(role),
       );
-      if (requiredRoles) {
-        const hasValidRole = requiredRoles.some((role: string) => {
-          return tokenData.roles.includes(role);
-        });
 
-        if (!hasValidRole) {
-          throw new UnauthorizedException('Insufficient permissions');
-        }
+      if (!hasValidRole) {
+        throw new UnauthorizedException(
+          'Access restricted to restaurant owners and administrators',
+        );
       }
 
       return true;

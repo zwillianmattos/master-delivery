@@ -13,12 +13,11 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateUserCommand } from '../../../application/commands/create-user/create-user.command';
 import { GetUserByEmailQuery } from '../../../application/queries/get-user/get-user.query';
-import { JwtAuthGuard } from '../../../infrastructure/auth/jwt/guards/jwt-auth.guard';
-import { RolesGuard } from '../../../infrastructure/auth/jwt/guards/roles.guard';
+import { JwtAuthGuard } from '../../../interfaces/http/guards/jwt-auth.guard';
 import { PrismaUserRole } from '../../../domain/entities/user.entity';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { Public } from '@/infrastructure/auth/jwt/decorators/public.decorator';
+import { Public } from '@/interfaces/http/decorators/public.decorator';
 import { Request } from 'express';
 
 // Interface para estender o tipo Request com user
